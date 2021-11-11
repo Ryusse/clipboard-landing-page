@@ -10,15 +10,16 @@ const { src, dest, watch, series } = require('gulp'),
 // Use dart-sass for @use
 sass.compiler = require('dart-sass')
 
-const htmlTask = () => {
-  return src('./index.html').pipe(validator()).pipe(dest('dist/'))
-}
 // Sass Task
 function scssTask() {
   return src('src/scss/main.scss', { sourcemaps: true })
     .pipe(sass())
     .pipe(postcss([autoprefixer(), cssnano()]))
     .pipe(dest('dist/css', { sourcemaps: '.' }))
+}
+
+const htmlTask = () => {
+  return src('./index.html').pipe(validator()).pipe(dest('dist/'))
 }
 
 // Browsersync
@@ -44,7 +45,7 @@ function browserSyncReload(cb) {
 // Watch Task
 function watchTask() {
   watch('*.html', browserSyncReload)
-  watch(['src/scss/**/*.scss', 'src/**/*.png', 'src/**/*.jpg'], series(scssTask, browserSyncReload))
+  watch(['src/scss/**/*.scss'], series(scssTask, browserSyncReload))
 }
 
 // Default Gulp Task
