@@ -10,9 +10,12 @@ const { src, dest, watch, series } = require('gulp'),
 // Use dart-sass for @use
 sass.compiler = require('dart-sass')
 
+<<<<<<< HEAD
 const htmlTask = () => {
   return src('./index.html').pipe(validator()).pipe(dest('dist/'))
 }
+=======
+>>>>>>> ae5320e (changes)
 // Sass Task
 function scssTask() {
   return src('src/scss/main.scss', { sourcemaps: true })
@@ -21,6 +24,13 @@ function scssTask() {
     .pipe(dest('dist/css', { sourcemaps: '.' }))
 }
 
+<<<<<<< HEAD
+=======
+const htmlTask = () => {
+  return src('./index.html').pipe(validator()).pipe(dest('dist/'))
+}
+
+>>>>>>> ae5320e (changes)
 // Browsersync
 function browserSyncServe(cb) {
   browsersync.init({
@@ -44,7 +54,11 @@ function browserSyncReload(cb) {
 // Watch Task
 function watchTask() {
   watch('*.html', browserSyncReload)
+<<<<<<< HEAD
   watch(['src/scss/**/*.scss', 'src/**/*.png', 'src/**/*.jpg'], series(scssTask, browserSyncReload))
+=======
+  watch(['src/scss/**/*.scss'], series(scssTask, browserSyncReload))
+>>>>>>> ae5320e (changes)
 }
 
 // Default Gulp Task
